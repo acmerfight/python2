@@ -14,7 +14,7 @@ def my_global_function(a, b):
 
 class AboutMethods(Koan):
     def test_calling_a_global_function(self):
-        self.assertEqual(__, my_global_function(2, 3))
+        self.assertEqual(5, my_global_function(2, 3))
   
     # NOTE: Wrong number of arguments is not a SYNTAX error, but a
     # runtime error.
@@ -22,7 +22,7 @@ class AboutMethods(Koan):
         try:
             my_global_function()
         except Exception as exception:
-            self.assertEqual(__, type(exception).__name__)
+            self.assertEqual('TypeError', type(exception).__name__)
             self.assertMatch(
                 r'my_global_function\(\) takes exactly 2 arguments \(0 given\)',
                 exception[0])
@@ -32,7 +32,7 @@ class AboutMethods(Koan):
         except Exception as e:
             
             # Note, watch out for parenthesis. They need slashes in front!
-            self.assertMatch(__, e[0])
+            self.assertMatch('my_global_function\(\) takes exactly 2 arguments \(3 given\)', e[0])
     
     # ------------------------------------------------------------------
     
@@ -40,7 +40,7 @@ class AboutMethods(Koan):
         sum = a + b
 
     def test_which_does_not_return_anything(self):
-        self.assertEqual(__, self.pointless_method(1, 2))
+        self.assertEqual(None, self.pointless_method(1, 2))
         # Notice that methods accessed from class scope do not require
         # you to pass the first "self" argument?
         
@@ -50,8 +50,8 @@ class AboutMethods(Koan):
         return [a, b]
 
     def test_calling_with_default_values(self):
-        self.assertEqual(__, self.method_with_defaults(1))
-        self.assertEqual(__, self.method_with_defaults(1, 2))
+        self.assertEqual([1, 'default_value'], self.method_with_defaults(1))
+        self.assertEqual([1, 2], self.method_with_defaults(1, 2))
 
     # ------------------------------------------------------------------
 
@@ -59,9 +59,9 @@ class AboutMethods(Koan):
         return args
 
     def test_calling_with_variable_arguments(self):
-        self.assertEqual(__, self.method_with_var_args())
+        self.assertEqual((), self.method_with_var_args())
         self.assertEqual(('one', ), self.method_with_var_args('one'))
-        self.assertEqual(__, self.method_with_var_args('one', 'two'))
+        self.assertEqual(('one', 'two'), self.method_with_var_args('one', 'two'))
 
     # ------------------------------------------------------------------
 
@@ -72,13 +72,13 @@ class AboutMethods(Koan):
         def function_with_the_same_name(a, b):
             return a * b
 
-        self.assertEqual(__, function_with_the_same_name(3, 4))
+        self.assertEqual(12, function_with_the_same_name(3, 4))
     
     def test_calling_methods_in_same_class_with_explicit_receiver(self):
         def function_with_the_same_name(a, b):
             return a * b
 
-        self.assertEqual(__, self.function_with_the_same_name(3, 4))
+        self.assertEqual(7, self.function_with_the_same_name(3, 4))
 
     # ------------------------------------------------------------------
 
@@ -91,10 +91,10 @@ class AboutMethods(Koan):
         return 42
 
     def test_that_old_methods_are_hidden_by_redefinitions(self):
-        self.assertEqual(__, self.another_method_with_the_same_name())
+        self.assertEqual(42, self.another_method_with_the_same_name())
 
     def test_that_overlapped_method_is_still_there(self):
-        self.assertEqual(__, self.link_to_overlapped_method())
+        self.assertEqual(10, self.link_to_overlapped_method())
 
     # ------------------------------------------------------------------
 
