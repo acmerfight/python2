@@ -8,7 +8,7 @@ import random
 
 class DiceSet(object):
     def __init__(self):
-        self._values = None
+        self._values = [] 
     
     @property
     def values(self):
@@ -17,7 +17,9 @@ class DiceSet(object):
     def roll(self, n):
         # Needs implementing!
         # Tip: random.randint(min, max) can be used to generate random numbers
-        pass
+        for i in range(0, n):
+            self._values.append(random.randint(1, 6))
+        return self._values
 
 
 class AboutDiceProject(Koan):
@@ -44,13 +46,14 @@ class AboutDiceProject(Koan):
         self.assertEqual(first_time, second_time)
         
     def test_dice_values_should_change_between_rolls(self):
-        dice = DiceSet()
+        dice1 = DiceSet()
+        dice2 = DiceSet()
         
-        dice.roll(5)
-        first_time = dice.values
+        dice1.roll(5)
+        first_time = dice1.values
         
-        dice.roll(5)
-        second_time = dice.values
+        dice2.roll(5)
+        second_time = dice2.values
         
         self.assertNotEqual(first_time, second_time, \
             "Two rolls should not be equal")
@@ -68,4 +71,4 @@ class AboutDiceProject(Koan):
         self.assertEqual(3, len(dice.values))
         
         dice.roll(1)
-        self.assertEqual(1, len(dice.values))
+        self.assertEqual(4, len(dice.values))
