@@ -33,7 +33,7 @@ class AboutExceptions(Koan):
             "RuntimeError is a subclass of StandardError")
         
         self.assertEqual('Oops', ex[0])
-        #print "ex:", ex[0]
+        print "ex:", ex[0]
     
     def test_raising_a_specific_error(self):
         result = None
