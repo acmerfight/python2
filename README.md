@@ -1,4 +1,2 @@
 python2
-=======
-
-learn python
+python_koans answer
